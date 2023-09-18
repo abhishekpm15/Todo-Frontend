@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState, useId, useEffect } from "react";
 import "./App.css";
 import uuid from "react-uuid";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,8 +9,18 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [element, setElements] = useState("");
   const id = useId();
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
   const [datas, setDatas] = useState([]);
+  const [isData, setIsData] = useState(false);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/get-items").then((response) => {
+      console.log(response.data);
+      if (response.data.length === 0) {
+        return;
+      } else setDatas(response.data);
+    });
+  }, []);
 
   const getData = () => {
     axios.get("http://localhost:3000/get-items").then((response) => {
@@ -55,7 +65,7 @@ function App() {
           if (res.status === 200) {
             console.log("toasted");
             toast.success("Successfully inserted the data !");
-            getData()
+            getData();
             // setTimeout(() => {
             //   window.location.replace("/");
             // }, 2000);
@@ -78,11 +88,10 @@ function App() {
       .delete(`http://localhost:3000/delete-data/${id}`)
       .then((response) => {
         console.log(response.data);
+        toast.error("Successfully deleted the data !");
         setTimeout(() => {
-          toast.error("Successfully deleted the data !");
           getData();
         }, 1000);
-        // window.location.replace("/delete-data/");
       })
 
       .catch((error) => {
@@ -115,7 +124,16 @@ function App() {
         >
           <button>add item</button>
         </div>
-
+        {isData && (
+          <div
+            className="text-xl cursor-pointer bg-blue-500 text-white px-2 rounded-md py-1 "
+            onClick={() => {
+              getData();
+            }}
+          >
+            <button>view item</button>
+          </div>
+        )}
       </div>
       <div className="mx-auto justify-center">
         {datas.map((item, index) => {
