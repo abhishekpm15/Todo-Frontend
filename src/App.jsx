@@ -22,7 +22,7 @@ function App() {
           return;
         } else setDatas(response.data);
       });
-    setDataChange(!dataChange);
+    setDataChange(false);
   }, [dataChange]);
 
   const getData = () => {
@@ -37,7 +37,7 @@ function App() {
           }, 2000);
         } else {
           getData();
-          setDataChange(!dataChange);
+          setDataChange(true);
         }
       });
   };
@@ -74,7 +74,7 @@ function App() {
             console.log("toasted");
             toast.success("Successfully inserted the data !");
             getData();
-            setDataChange(!dataChange);
+            setDataChange(true);
             // getData();
             // setTimeout(() => {
             //   window.location.replace("/");
