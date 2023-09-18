@@ -17,10 +17,13 @@ function App() {
     axios
       .get("https://todo-backend-production-4e38.up.railway.app/get-items")
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.length === 0) {
-          return;
-        } else{
+          toast.error("No data found !");
+          // setTimeout(() => {
+          //   window.location.replace("/");
+          // }, 2000);
+        } else {
           setDatas(response.data);
           getData();
         }
@@ -32,12 +35,12 @@ function App() {
     axios
       .get("https://todo-backend-production-4e38.up.railway.app/get-items")
       .then((response) => {
-        console.log(response.data);
         if (response.data.length === 0) {
-          toast.error("No data found !");
+          console.log(response.data);
           setTimeout(() => {
+            toast.error("No data found !");
             window.location.replace("/");
-          }, 2000);
+          }, 500);
         } else {
           getData();
           setDataChange(true);
