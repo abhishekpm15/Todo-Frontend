@@ -14,7 +14,7 @@ function App() {
   const [isData, setIsData] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/get-items").then((response) => {
+    axios.get("todo-backend-production-4e38.up.railway.app/get-items").then((response) => {
       console.log(response.data);
       if (response.data.length === 0) {
         return;
@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   const getData = () => {
-    axios.get("http://localhost:3000/get-items").then((response) => {
+    axios.get("todo-backend-production-4e38.up.railway.app/get-items").then((response) => {
       console.log(response.data);
       if (response.data.length === 0) {
         toast.error("No data found !");
@@ -54,7 +54,7 @@ function App() {
       // ]);
       axios({
         method: "post",
-        url: "http://localhost:3000/items",
+        url: "todo-backend-production-4e38.up.railway.app/items",
         data: {
           item: element,
           strike: false,
@@ -85,7 +85,7 @@ function App() {
   const handleDelete = (index, id) => {
     console.log(index);
     axios
-      .delete(`http://localhost:3000/delete-data/${id}`)
+      .delete(`todo-backend-production-4e38.up.railway.app/delete-data/${id}`)
       .then((response) => {
         console.log(response.data);
         toast.error("Successfully deleted the data !");
