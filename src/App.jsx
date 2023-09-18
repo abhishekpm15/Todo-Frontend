@@ -73,6 +73,7 @@ function App() {
           if (res.status === 200) {
             console.log("toasted");
             toast.success("Successfully inserted the data !");
+            getData();
             setDataChange(true);
             // getData();
             // setTimeout(() => {
