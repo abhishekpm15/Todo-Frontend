@@ -25,7 +25,7 @@ function App() {
           // }, 2000);
         } else {
           setDatas(response.data);
-          getData();
+          getData()
         }
       });
     setDataChange(false);
