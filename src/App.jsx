@@ -20,7 +20,10 @@ function App() {
         console.log(response.data);
         if (response.data.length === 0) {
           return;
-        } else setDatas(response.data);
+        } else{
+          setDatas(response.data);
+          getData();
+        }
       });
     setDataChange(false);
   }, [dataChange]);
