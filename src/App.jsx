@@ -11,7 +11,7 @@ function App() {
   const id = useId();
   // const [items, setItems] = useState([]);
   const [datas, setDatas] = useState([]);
-  const [isData, setIsData] = useState(false);
+  const [dataChange, setDataChange] = useState(false);
 
   useEffect(() => {
     axios
@@ -22,7 +22,8 @@ function App() {
           return;
         } else setDatas(response.data);
       });
-  }, []);
+    setDataChange(false);
+  }, [dataChange]);
 
   const getData = () => {
     axios
@@ -34,7 +35,10 @@ function App() {
           setTimeout(() => {
             window.location.replace("/");
           }, 2000);
-        } else setDatas(response.data);
+        } else {
+          getData();
+          setDataChange(true);
+        }
       });
   };
 
@@ -69,7 +73,8 @@ function App() {
           if (res.status === 200) {
             console.log("toasted");
             toast.success("Successfully inserted the data !");
-            getData();
+            setDataChange(true);
+            // getData();
             // setTimeout(() => {
             //   window.location.replace("/");
             // }, 2000);
@@ -97,7 +102,7 @@ function App() {
         toast.error("Successfully deleted the data !");
         setTimeout(() => {
           getData();
-        }, 1000);
+        }, 500);
       })
 
       .catch((error) => {
@@ -130,16 +135,6 @@ function App() {
         >
           <button>add item</button>
         </div>
-        {isData && (
-          <div
-            className="text-xl cursor-pointer bg-blue-500 text-white px-2 rounded-md py-1 "
-            onClick={() => {
-              getData();
-            }}
-          >
-            <button>view item</button>
-          </div>
-        )}
       </div>
       <div className="mx-auto justify-center">
         {datas.map((item, index) => {
