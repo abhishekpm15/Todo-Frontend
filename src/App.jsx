@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://todo-backend-production-4e38.up.railway.app/get-items")
+      .get("https://todo-backend-production-4ee38.up.railway.app/get-items")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length === 0) {
