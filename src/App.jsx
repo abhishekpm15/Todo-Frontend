@@ -33,7 +33,7 @@ function App() {
 
   const getData = () => {
     axios
-      .get("https://todo-backend-production-4e38.up.railway.app/get-items")
+      .get("https://todo-backend-production-4ee38.up.railway.app/get-items")
       .then((response) => {
         if (response.data.length === 0) {
           console.log(response.data);
@@ -68,7 +68,7 @@ function App() {
       // ]);
       axios({
         method: "post",
-        url: "https://todo-backend-production-4e38.up.railway.app/items",
+        url: "https://todo-backend-production-4ee38.up.railway.app/items",
         data: {
           item: element,
           strike: false,
@@ -102,7 +102,7 @@ function App() {
     console.log(index);
     axios
       .delete(
-        `https://todo-backend-production-4e38.up.railway.app/delete-data/${id}`
+        `https://todo-backend-production-4ee38.up.railway.app/delete-data/${id}`
       )
       .then((response) => {
         console.log(response.data);
